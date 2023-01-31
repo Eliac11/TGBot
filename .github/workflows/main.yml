@@ -25,5 +25,17 @@ jobs:
       - name: Securing code
         run: pyarmor obfuscate --output TGBot main.py
         
+      - name: System tests BioDynaMo
+        shell: bash
+        working-directory: build
+        run: |
+         set -x
+
       - name: Send secured code with SFTP to PetrSU server
         run: sshpass -p ${{ secrets.PASSWORD }} scp -o StrictHostKeyChecking=no -r ./TGBot/* posti@kappa.cs.petrsu.ru:/repo2/
+
+      - name: System tests BioDynaMo
+        shell: bash
+        working-directory: build
+        run: |
+         set -x
