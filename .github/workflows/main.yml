@@ -12,30 +12,19 @@ jobs:
       - name: Clone unsecured code
         uses: actions/checkout@v2
 
-      - uses: actions/setup-python@v4
+      - name: Clone unsecured code
+        uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
       - name: Install PyArmor
         run: pip install pyarmor
-        
+
       - name: Install sshpath
         run: sudo apt-get install sshpass
 
       - name: Securing code
         run: pyarmor obfuscate --output TGBot main.py
-        
-      - name: System tests BioDynaMo
-        shell: bash
-        working-directory: build
-        run: |
-         set -x
 
       - name: Send secured code with SFTP to PetrSU server
-        run: sshpass -p ${{ secrets.PASSWORD }} scp -o StrictHostKeyChecking=no -r ./TGBot/* posti@kappa.cs.petrsu.ru:/repo2/
-
-      - name: System tests BioDynaMo
-        shell: bash
-        working-directory: build
-        run: |
-         set -x
+        run: sshpass -p ${{ secrets.PASSWORD }} scp -o StrictHostKeyChecking=no -r ./TGBot/ posti@kappa.cs.petrsu.ru:/home/02/posti/repo2/
