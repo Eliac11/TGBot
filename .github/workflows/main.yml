@@ -26,7 +26,4 @@ jobs:
         run: pyarmor obfuscate --output TGBot main.py
         
       - name: Send secured code with SFTP to PetrSU server
-        run: |
-          sshpass -p ${{ secrets.PASSWORD }} sftp -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
-          cd repo2
-          put -P ./TGBot
+        run: sshpass -p ${{ secrets.PASSWORD }} scp -o StrictHostKeyChecking=no ./TGBot posti@kappa.cs.petrsu.ru:/repo2
