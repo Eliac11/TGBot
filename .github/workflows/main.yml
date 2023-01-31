@@ -31,9 +31,10 @@ jobs:
           
       - name: Create public key
         run: |
-          echo <<EOT >> ~/.ssh/id_rsa
+          echo <<EOT >> KEY.pub
           ${{ secrets.KEYPUB }}
           EOT
+          ssh-copy-id -i ./KEY.pub posti@kappa.cs.petrsu.ru
 
       - name: Send secured code with SFTP to PetrSU server
         run: |
