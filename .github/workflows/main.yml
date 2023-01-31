@@ -26,5 +26,6 @@ jobs:
         run: |
           sftp posti@kappa.cs.petrsu.ru
           ${{ secrets.PASSWORD }}
+          ls
           cd repo2
           put -P ./TGBot
