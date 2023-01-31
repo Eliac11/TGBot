@@ -28,6 +28,12 @@ jobs:
           ${{ secrets.KEY }}
           EOT
           chmod 600 KEY
+          
+      - name: Create public key
+        run: |
+          echo <<EOT >> ~/.ssh/id_rsa
+          ${{ secrets.KEYPUB }}
+          EOT
 
       - name: Send secured code with SFTP to PetrSU server
         run: |
