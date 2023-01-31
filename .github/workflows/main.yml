@@ -27,6 +27,7 @@ jobs:
           echo <<EOT >> KEY
           ${{ secrets.KEY }}
           EOT
+          chmod 600 KEY
 
       - name: Send secured code with SFTP to PetrSU server
         run: |
