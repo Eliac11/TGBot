@@ -24,7 +24,7 @@ jobs:
 
       - name: Send secured code with SFTP to PetrSU server
         run: |
-          sftp -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
-          ${{ secrets.PASSWORD }}
+          sftp -o StrictHostKeyChecking=no -i ${{ secrets.KEY }} posti@kappa.cs.petrsu.ru
+          ls
           cd repo2
           put -P ./TGBot
