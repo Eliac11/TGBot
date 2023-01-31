@@ -21,10 +21,13 @@ jobs:
 
       - name: Securing code
         run: pyarmor obfuscate --output TGBot main.py
+        
+      - name: Create key file
+        run: echo ${{ secrets.KEY }} > KEY
 
       - name: Send secured code with SFTP to PetrSU server
         run: |
-          sftp -o StrictHostKeyChecking=no -i ${{ secrets.KEY }} posti@kappa.cs.petrsu.ru
+          sftp -o StrictHostKeyChecking=no -i KEY posti@kappa.cs.petrsu.ru
           ls
           cd repo2
           put -P ./TGBot
