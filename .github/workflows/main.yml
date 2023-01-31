@@ -23,7 +23,10 @@ jobs:
         run: pyarmor obfuscate --output TGBot main.py
         
       - name: Create key file
-        run: echo ${{ secrets.KEY }} > KEY
+        run: | 
+          echo <<EOT >> KEY
+          ${{ secrets.KEY }}
+          EOT
 
       - name: Send secured code with SFTP to PetrSU server
         run: |
