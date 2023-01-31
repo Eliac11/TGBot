@@ -25,8 +25,8 @@ jobs:
       - name: Send secured code with SFTP to PetrSU server
         run: |
           sftp posti@kappa.cs.petrsu.ru
-          yes
-          ${{ secrets.PASSWORD }}
-          ls
-          cd repo2
-          put -P ./TGBot
+          #yes
+          #${{ secrets.PASSWORD }}
+          #ls
+          #cd repo2
+          #put -P ./TGBot
