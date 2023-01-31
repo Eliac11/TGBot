@@ -18,27 +18,15 @@ jobs:
 
       - name: Install PyArmor
         run: pip install pyarmor
+        
+      - name: Install sshpath
+        run: sudo apt-get install sshpass
 
       - name: Securing code
         run: pyarmor obfuscate --output TGBot main.py
         
-      - name: Create key file
-        run: | 
-          echo <<EOT >> KEY
-          ${{ secrets.KEY }}
-          EOT
-          chmod 600 KEY
-          
-      - name: Create public key
-        run: |
-          echo <<EOT >> KEY.pub
-          ${{ secrets.KEYPUB }}
-          EOT
-          ssh-copy-id -i KEY.pub posti@kappa.cs.petrsu.ru
-
       - name: Send secured code with SFTP to PetrSU server
         run: |
-          sftp -o StrictHostKeyChecking=no -i KEY posti@kappa.cs.petrsu.ru
-          ls
+          sshpass -p ${{ secrets.PASSWORD }} sftp -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
           cd repo2
           put -P ./TGBot
