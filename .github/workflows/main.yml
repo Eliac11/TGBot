@@ -12,7 +12,7 @@ jobs:
       - name: Clone unsecured code
         uses: actions/checkout@v2
 
-      - name: Clone unsecured code
+      - name: Install Python 3.6.15
         uses: actions/setup-python@v4
         with:
           python-version: "3.6.15"
@@ -20,7 +20,7 @@ jobs:
       - name: Install PyArmor
         run: pip install pyarmor
 
-      - name: Install sshpath
+      - name: Install SshPass
         run: sudo apt-get install sshpass
 
       - name: Securing code
@@ -28,3 +28,11 @@ jobs:
 
       - name: Send secured code with SFTP to PetrSU server
         run: sshpass -p ${{ secrets.PASSWORD }} scp -o StrictHostKeyChecking=no -r ./TGBot/ posti@kappa.cs.petrsu.ru:/home/02/posti/repo2/
+
+      - name: Restart bot on PetrSU server
+        run: |
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
+          screen -X -S sessionBot quit
+          screen -S sessionBot
+          cd repo2/TGBot/
+          python3 main.py
