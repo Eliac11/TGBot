@@ -154,5 +154,6 @@ cython_debug/
 *.dat
 *.dir
 -token.txt
-telebottoken.py
+-telebottoken.py
 tmp/*
+telebottoken.py
