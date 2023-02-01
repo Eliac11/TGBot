@@ -40,5 +40,6 @@ jobs:
         run: |
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
           screen -d -m -S sessionBot
+          ls
           cd repo2/TGBot/
           python3 main.py
