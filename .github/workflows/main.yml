@@ -29,10 +29,15 @@ jobs:
       - name: Send secured code with SFTP to PetrSU server
         run: sshpass -p ${{ secrets.PASSWORD }} scp -o StrictHostKeyChecking=no -r ./TGBot/ posti@kappa.cs.petrsu.ru:/home/02/posti/repo2/
 
-      - name: Restart bot on PetrSU server
+      - name: Close screen with sessionBot name
+        continue-on-error: true
         run: |
           sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
           screen -X -S sessionBot quit
+
+      - name: Restart bot on PetrSU server
+        run: |
+          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
           screen -S sessionBot
           cd repo2/TGBot/
           python3 main.py
