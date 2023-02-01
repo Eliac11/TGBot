@@ -32,14 +32,7 @@ jobs:
 
       - name: Close screen with sessionBot name
         continue-on-error: true
-        run: |
-          sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
-          screen -X -S sessionBot quit
+        run: sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru 'screen -X -S sessionBot quit'
 
       - name: Restart bot on PetrSU server
-        run: |
-          sshpass -p ${{ secrets.PASSWORD }} ssh -tt -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru
-          screen -d -m -S sessionBot
-          ls
-          cd repo2/TGBot/
-          python3 main.py
+        run: sshpass -p ${{ secrets.PASSWORD }} ssh -o StrictHostKeyChecking=no posti@kappa.cs.petrsu.ru 'screen -d -m -S sessionBot; cd repo2/TGBot/; python3 main.py'
