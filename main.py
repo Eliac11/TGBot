@@ -7,12 +7,9 @@ import classData
 import classPost
 import cntrConsole
 from localization import loc
+import tokenMngr
 
-try:
-    token = open("token.txt").read().replace("\n", "")
-except:
-    print("файл с токеном...")
-    quit()
+token = tokenMngr.getToken()
 bot = telebot.TeleBot(token)
 
 Data = classData.DataBase()
